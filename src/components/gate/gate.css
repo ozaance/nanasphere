@@ -511,3 +511,24 @@
     transition: none;
   }
 }
+
+/* Sortie sans collecte, visible dès l'accueil (HANDOVER §8). */
+.gate-skip {
+  position: relative;
+  z-index: 15;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 12px;
+  padding: 0 14px;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.gate-skip:hover {
+  color: var(--cream);
+}

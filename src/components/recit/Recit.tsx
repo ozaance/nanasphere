@@ -4,6 +4,9 @@ import { HELPLINE, LegalFooter } from "@/components/LegalFooter";
 import { Logo } from "@/components/Marks";
 import { MAISON_PERKS, MAISON_PRICE_CENTS, OFFERS, priceLabel } from "@/content/offers";
 import { StarList, storyStars } from "@/lib/stars";
+import { Waitlist } from "@/components/Waitlist";
+import { ActionBar } from "./ActionBar";
+import { Faq, Steps } from "./Reassurance";
 import { NanaVideo } from "./NanaVideo";
 import { HeaderChip, HeroTitle, SunCard, SunStage } from "./Personal";
 import { range } from "./range";
@@ -35,6 +38,8 @@ export function Recit() {
         </Link>
         <HeaderChip />
       </header>
+
+      <ActionBar />
 
       {/* ciel qui reste en place derrière tout le récit */}
       <div className="sky" aria-hidden="true">
@@ -152,7 +157,19 @@ export function Recit() {
                 </li>
               ))}
             </ul>
-            <p className="helpline sa k-up" style={{ ...range(80, 96), marginTop: 14 }}>{HELPLINE}</p>
+            <p className="offers-note sa k-up" style={range(78, 92)}>
+              Les lectures ouvrent bientôt. <a href="#attente">Laisse ton e-mail</a> pour être prévenu·e en premier.
+            </p>
+            <p className="helpline sa k-up" style={{ ...range(84, 98), marginTop: 10 }}>{HELPLINE}</p>
+          </div>
+        </section>
+
+        {/* ===== IV bis · COMMENT ÇA SE PASSE ===== */}
+        <section className="chap pin" id="deroulement">
+          <div className="stage">
+            <div className="eyebrow sa k-up" style={range(0, 12)}>COMMENT ÇA SE PASSE</div>
+            <h2 className="h2 sa k-up" style={range(2, 18)}>De ton choix à ta lecture</h2>
+            <Steps />
           </div>
         </section>
 
@@ -204,9 +221,9 @@ export function Recit() {
             <div className="maison-price sa k-up" style={range(78, 92)}>
               {priceLabel({ priceCents: MAISON_PRICE_CENTS })} <span>par mois</span>
             </div>
-            {/* Destination à définir (liste d'attente puis abonnement) */}
-            <a href="#" className="btn-gold sa k-up" style={{ ...range(82, 98), marginTop: 14 }}>
-              Entrer dans la Maison
+            {/* L'abonnement n'existe pas encore : on capte l'intérêt. */}
+            <a href="#attente" className="btn-gold sa k-up" style={{ ...range(82, 98), marginTop: 14 }}>
+              Être prévenu·e de l’ouverture
             </a>
             <p className="helpline sa k-up" style={{ ...range(84, 100), marginTop: 12 }}>{HELPLINE}</p>
           </div>
@@ -244,16 +261,25 @@ export function Recit() {
           </div>
         </section>
 
+        {/* ===== QUESTIONS ===== */}
+        <section className="chap" id="questions">
+          <div className="stage stage-auto">
+            <div className="eyebrow sa k-up" style={range(0, 12)}>LES QUESTIONS QU’ON POSE</div>
+            <h2 className="h2 sa k-up" style={range(2, 16)}>Avant de te lancer</h2>
+            <Faq />
+          </div>
+        </section>
+
         {/* ===== FIN ===== */}
         <section className="final" id="fin">
           <div className="eyebrow">ET MAINTENANT</div>
           <h2 className="final-title cosmic-text">Ton ciel t’attend.</h2>
           <p className="lead" style={{ marginBottom: 26 }}>
-            Choisis ta lecture. Nana s’occupe du reste, avec écoute et bienveillance.
+            Les lectures ouvrent bientôt. Laisse ton e-mail : tu seras prévenu·e en premier, et Nana s’occupe du reste.
           </p>
-          <a href="#lectures" className="btn-gold">
-            Réserver ma lecture
-          </a>
+          <div id="attente" className="final-wl">
+            <Waitlist source="recit-fin" />
+          </div>
           <a href="#haut" className="to-top">
             ↑ Revenir en haut
           </a>

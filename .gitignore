@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ...sauf le gabarit, qui ne contient aucune valeur
+!.env.example

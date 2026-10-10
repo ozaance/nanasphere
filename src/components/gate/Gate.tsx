@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Constellation, Crescent, Logo, Sparkle } from "@/components/Marks";
 import { SIGNS, signIndex, todayISO } from "@/lib/signs";
 import { saveVisitor } from "@/lib/visitor";
+import { track } from "@/lib/track";
 import "./gate.css";
 
 type Screen = "accueil" | "formulaire" | "revelation";
@@ -44,6 +45,7 @@ export function Gate({ stars, surtitre = "LIS TON CIEL" }: { stars: ReactNode; s
     opener.current = e.currentTarget;
     setError("");
     setScreen("formulaire");
+    track("gate_ouvert");
   }
 
   function closeForm() {
@@ -84,6 +86,7 @@ export function Gate({ stars, surtitre = "LIS TON CIEL" }: { stars: ReactNode; s
     }
     setError("");
     setScreen("revelation");
+    track("gate_soumis");
   }
 
   function enterSite() {
@@ -92,6 +95,7 @@ export function Gate({ stars, surtitre = "LIS TON CIEL" }: { stars: ReactNode; s
   }
 
   function justLook() {
+    track("gate_contourne");
     saveVisitor(null);
     router.push("/recit");
   }
@@ -159,6 +163,10 @@ export function Gate({ stars, surtitre = "LIS TON CIEL" }: { stars: ReactNode; s
               </p>
               <button type="button" className="btn-gold gate-cta rise" style={delay(0.5)} onClick={openForm}>
                 Découvrir mon ciel
+              </button>
+              {/* Le site ne doit pas être conditionné à la collecte (HANDOVER §8). */}
+              <button type="button" className="gate-skip rise" style={delay(0.62)} onClick={justLook}>
+                Entrer sans donner mes infos
               </button>
             </div>
 
